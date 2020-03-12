@@ -31,8 +31,6 @@ class AuthController extends Controller
 
         $user->save();
 
-        $user->notify(new SignupActivate($user));
-        //event(new UserRegisteredEvent($user, $request->family_id));
         return response()->json(['message' => __('User created')], 201);
     }
 
