@@ -27,7 +27,7 @@ class AuthController extends Controller
                              'password'         => bcrypt($request->password),
                              'partner_email'    => null,
                              'activation_token' => Str::random(60),
-                             'children_id'      => null,
+                             'child_id'      => null,
                          ]);
         $user->save();
 

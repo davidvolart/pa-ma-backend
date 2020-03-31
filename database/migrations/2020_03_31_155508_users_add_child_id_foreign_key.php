@@ -14,9 +14,9 @@ class UsersAddChildIdForeignKey extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('children_id')->nullable();
+            $table->unsignedBigInteger('child_id')->nullable();
 
-            $table->foreign('children_id')
+            $table->foreign('child_id')
                 ->references('id')->on('children')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
