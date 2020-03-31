@@ -30,7 +30,6 @@ class UserSignUpRequest extends FormRequest
             'name'          => 'bail|required|string',
             'email'         => 'bail|required|string|email|unique:users',
             'password'      => 'bail|required|string|confirmed',
-            'partner_email' => 'bail|required|string|email',
         ];
     }
 

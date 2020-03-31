@@ -25,10 +25,10 @@ class AuthController extends Controller
                              'name'             => $request->name,
                              'email'            => $request->email,
                              'password'         => bcrypt($request->password),
-                             'partner_email'    => $request->partner_email,
+                             'partner_email'    => null,
                              'activation_token' => Str::random(60),
+                             'children_id'      => null,
                          ]);
-
         $user->save();
 
         return response()->json(['message' => __('User created')], 201);

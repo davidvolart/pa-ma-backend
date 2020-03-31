@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FamiliesRenameTableNameToChildUsers extends Migration
+class ChildsRenameTableToChildren extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class FamiliesRenameTableNameToChildUsers extends Migration
      */
     public function up()
     {
-        Schema::rename('families', 'child_users');
+        Schema::rename('childs', 'children');
     }
 
     /**
@@ -23,6 +23,6 @@ class FamiliesRenameTableNameToChildUsers extends Migration
      */
     public function down()
     {
-        Schema::rename('child_users', 'families');
+        Schema::rename('children', 'childs');
     }
 }

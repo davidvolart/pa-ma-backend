@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('active')->default(false);
             $table->string('activation_token');
-            $table->string('partner_email');
+            $table->string('partner_email')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
