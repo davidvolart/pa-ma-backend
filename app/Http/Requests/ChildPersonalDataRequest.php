@@ -25,7 +25,7 @@ class ChildPersonalDataRequest
     {
         return [
             'name'               => 'bail|required|string|max:50',
-            'id'                 => 'bail|string|max:9',
+            'id_card'            => 'bail|string|max:9',
             'health_care_number' => 'bail|string|max:20',
             'birthdate'          => 'string'
         ];
