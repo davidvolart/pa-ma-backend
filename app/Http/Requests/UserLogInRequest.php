@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Exceptions\AuthValidationFieldsException;
+use App\Exceptions\ValidationFieldsException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -34,6 +34,6 @@ class UserLogInRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new AuthValidationFieldsException($validator);
+        throw new ValidationFieldsException($validator);
     }
 }

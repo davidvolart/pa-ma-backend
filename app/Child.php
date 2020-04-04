@@ -14,6 +14,10 @@ class Child extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'surname1','surname2','id_card','height','weight'
+        'name', 'id_card', 'health_care_number', 'birthdate', 'shirt_size', 'pants_size', 'dress_size', 'shoes_size', 'height', 'weight'
     ];
+
+    function vaccine() {
+        return $this->hasMany('App\Vaccine');
+    }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Exceptions\ValidationFieldsException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 
-class ChildPersonalDataRequest
+class ChildPersonalDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,6 +35,6 @@ class ChildPersonalDataRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new AuthValidationFieldsException($validator);
+        throw new ValidationFieldsException($validator);
     }
 }

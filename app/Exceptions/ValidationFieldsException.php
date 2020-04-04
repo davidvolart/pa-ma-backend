@@ -6,7 +6,7 @@ use Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Contracts\Validation\Validator;
 
-class AuthValidationFieldsException extends Exception
+class ValidationFieldsException extends Exception
 {
     protected $validator;
     protected $code = Response::HTTP_UNPROCESSABLE_ENTITY;

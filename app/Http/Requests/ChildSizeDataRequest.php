@@ -5,9 +5,8 @@ namespace App\Http\Requests;
 use App\Exceptions\ValidationFieldsException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\App;
 
-class UserSignUpRequest extends FormRequest
+class ChildSizeDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +26,12 @@ class UserSignUpRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'bail|required|string',
-            'email'         => 'bail|required|string|email|unique:users',
-            'password'      => 'bail|required|string|confirmed',
+            'shirt_size' => 'bail:string|max:10',
+            'weight'     => 'numeric',
+            'dress_size' => 'bail|string|max:15',
+            'pants_size' => 'bail|string|max:15',
+            'height'     => 'numeric',
+            'shoes_size' => 'bail|string|max:15',
         ];
     }
 
