@@ -73,10 +73,4 @@ class ChildController
         $child = Child::find($child_id);
         return response()->json(['message' => 'User has a child registered.', "child" => $child], 200);
     }
-
-
-    public function listVaccines()
-    {
-
-    }
 }

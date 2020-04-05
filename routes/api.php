@@ -27,7 +27,8 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('personaldata', 'ChildController@storePersonalData');
     Route::post('sizedata', 'ChildController@storeSizeData');
     Route::get('child', 'ChildController@listChild');
-    Route::get('vaccines', 'ChildController@listVaccines');
+    Route::get('vaccines', 'VaccineController@listVaccines');
+    Route::post('vaccine', 'VaccineController@storeVaccine');
 });
 
 

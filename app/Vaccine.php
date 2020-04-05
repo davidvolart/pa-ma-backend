@@ -2,8 +2,14 @@
 
 namespace App;
 
+use App\Models\Affiliate;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int child_id
+ * @property string name
+ * @property date date
+ */
 class Vaccine extends Model
 {
     public $timestamps = false;
@@ -14,10 +20,11 @@ class Vaccine extends Model
      * @var array
      */
     protected $fillable = [
-        'child_id', 'name','date'
+        'name', 'child_id', 'date'
     ];
 
-    function child() {
+    function child()
+    {
         return $this->belongsTo('App\Child');
     }
 }

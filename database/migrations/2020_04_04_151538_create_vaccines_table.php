@@ -16,8 +16,8 @@ class CreateVaccinesTable extends Migration
         Schema::create('vaccines', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->bigInteger('children_id')->unsigned();
-            $table->foreign('children_id')->references('id')->on('children');
+            $table->bigInteger('child_id')->unsigned();
+            $table->foreign('child_id')->references('id')->on('children');
             $table->date('date');
         });
     }
