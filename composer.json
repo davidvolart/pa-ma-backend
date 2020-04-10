@@ -14,7 +14,8 @@
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.4",
         "laravel/tinker": "^2.0",
-        "twbs/bootstrap": "^4.4"
+        "twbs/bootstrap": "^4.4",
+        "ext-json": "*"
     },
     "require-dev": {
         "behat/behat": "^3.6",

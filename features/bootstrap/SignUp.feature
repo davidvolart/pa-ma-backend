@@ -1,5 +1,12 @@
 Feature:Sign Up
 
+    Scenario: Attempt to Sign up with valid email and password
+        When A User insert Frank on name field
+        And insert "jhon@hotmail.com" on email field
+        And insert 8972 on password field
+        And insert 8972 on password confirmation
+        Then User Frank has been signed up
+
     Scenario: Attempt to Sign up with empty name
         When A User insert "" on name field
         And insert "jhon@gmail.com" on email field
@@ -48,10 +55,3 @@ Feature:Sign Up
         And insert 123 on password field
         And insert 123 on password confirmation
         Then User Jhon has been signed up
-
-    Scenario: Attempt to Sign up with duplicated email
-        When A User insert Frank on name field
-        And insert "jhon@gmail.com" on email field
-        And insert 8972 on password field
-        And insert 8972 on password confirmation
-        Then User Frank has not been signed up

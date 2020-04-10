@@ -23,7 +23,7 @@ class ChildController
 
             foreach ($personal_data_keys as $key) {
                 $value = request($key);
-                if ($key == 'birthdate') {
+                if ($key == 'birthdate' && !is_null($value)) {
                     try {
                         $date = explode('/', $value);
                         $value = Carbon::createFromDate($date[2], $date[1], $date[0], 'Europe/Madrid');

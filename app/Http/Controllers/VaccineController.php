@@ -31,15 +31,23 @@ class VaccineController
         $vaccine = new Vaccine;
         $vaccine->name = request("name");
         $vaccine->child_id = $child_id;
+
+        if($date_value = $this->getDateInUniversalFormat()){
+            $vaccine->date = $date_value;
+            $vaccine->save();
+            return response()->json(['message' => 'Vaccine stored correctly', "vaccine" => Vaccine::find($vaccine->id)], 201);
+        }
+
+        return response()->json(['message' => 'Field birthdate must be a correct date format.'], 400);
+    }
+
+    private function getDateInUniversalFormat(){
         try {
             $date = explode('/', request("date"));
             $date_value = Carbon::createFromDate($date[2], $date[1], $date[0], 'Europe/Madrid');
+            return $date_value;
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Field birthdate must be a correct date format.'], 400);
+            return null;
         }
-        $vaccine->date = $date_value;
-        $vaccine->save();
-
-        return response()->json(['message' => 'Vaccine stored correctly', "vaccine" => Vaccine::find($vaccine->id)], 201);
     }
 }

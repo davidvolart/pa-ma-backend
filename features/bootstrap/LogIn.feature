@@ -8,8 +8,10 @@ Feature:Log in
         Then User Jhon is logged in
 
     Scenario: Attempt to login with invalid credentials
-        Given a User with email "jhon@hotmail.com" and password 123
-        When user insert "jhonv@hotmail.com" on email field
+        Given a User with email "user@gmail.com" and password 123
+        When user insert "jhon@hotmail.com" on email field
         And insert 456 on password field
         And click log_in button
         Then User Jhon is not logged in
+
+
