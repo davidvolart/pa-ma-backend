@@ -18,17 +18,19 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('signup', 'AuthController@signup');
     Route::get('signup/activate/{token}', 'AuthController@signupActivate');
 
-    Route::group(['middleware' => 'auth:api'], function() {
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('user', 'AuthController@user');
         Route::get('logout', 'AuthController@logout');
     });
 });
 
-Route::group(['middleware' => 'auth:api'], function() {
+Route::group(['middleware' => 'auth:api'], function () {
     Route::post('personaldata', 'ChildController@storePersonalData');
     Route::post('sizedata', 'ChildController@storeSizeData');
     Route::get('child', 'ChildController@listChild');
     Route::get('vaccines', 'VaccineController@listVaccines');
     Route::post('vaccine', 'VaccineController@storeVaccine');
+    Route::post('family', 'FamilyController@registerFamily');
 });
 
 

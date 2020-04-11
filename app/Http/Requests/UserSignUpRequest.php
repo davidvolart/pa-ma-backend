@@ -27,9 +27,10 @@ class UserSignUpRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'bail|required|string',
-            'email'         => 'bail|required|string|email|unique:users',
-            'password'      => 'bail|required|string|confirmed',
+            'name'        => 'bail|required|string',
+            'email'       => 'bail|required|string|email|unique:users',
+            'password'    => 'bail|required|string|confirmed',
+            'family_code' => 'string'
         ];
     }
 

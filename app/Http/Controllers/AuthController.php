@@ -17,8 +17,14 @@ class AuthController extends Controller
 {
     public function signup(UserSignUpRequest $request)
     {
-        if(is_numeric($request->name)){
+        if (is_numeric($request->name)) {
             return response()->json(['message' => __('Field Name must be an String')], 422);
+        }
+
+        $child_id = null;
+        if($family_code = $request->family_code){
+            $user = User::where('family_code', $family_code);
+            $child_id = $user->child_id;
         }
 
         $user = new User([
@@ -27,7 +33,7 @@ class AuthController extends Controller
                              'password'         => bcrypt($request->password),
                              'partner_email'    => null,
                              'activation_token' => Str::random(60),
-                             'child_id'      => null,
+                             'child_id'         => $child_id,
                          ]);
         $user->save();
 
@@ -53,10 +59,13 @@ class AuthController extends Controller
         }
 
         $token->save();
+        $user = User::where('email',request('email'))->first();
+
         return response()->json([
                                     'access_token' => $tokenResult->accessToken,
                                     'token_type'   => 'Bearer',
                                     'expires_at'   => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString(),
+                                    'family_code'     => $user->family_code
                                 ]);
     }
 
