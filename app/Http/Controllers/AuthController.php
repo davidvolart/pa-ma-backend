@@ -22,21 +22,27 @@ class AuthController extends Controller
         }
 
         $child_id = null;
+        $partner_email = null;
         if($family_code = $request->family_code){
-            $user = User::where('family_code', $family_code);
-            $child_id = $user->child_id;
+            $partner = User::where('family_code', $family_code)->first();
+            if($partner == null){
+                return response()->json(['message' => __('Family code not valid')], 422);
+            }
+            $partner_email = $partner->email;
+            $child_id = $partner->children_id;
         }
 
         $user = new User([
                              'name'             => $request->name,
                              'email'            => $request->email,
                              'password'         => bcrypt($request->password),
-                             'partner_email'    => null,
+                             'family_code'      => $request->family_code,
+                             'partner_email'    => $partner_email,
                              'activation_token' => Str::random(60),
-                             'child_id'         => $child_id,
+                             'children_id'      => $child_id,
                          ]);
-        $user->save();
 
+        $user->save();
         return response()->json(['message' => __('User created')], 201);
     }
 
