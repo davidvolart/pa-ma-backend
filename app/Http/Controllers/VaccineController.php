@@ -13,7 +13,7 @@ class VaccineController
 {
     public function listVaccines(Request $request)
     {
-        $child_id = $request->user()->child_id;
+        $child_id = $request->user()->children_id;
         if ($child_id == null) {
             return response()->json(['message' => 'User has not registered a child yest.', "child" => null], 400);
         }
@@ -23,7 +23,7 @@ class VaccineController
 
     public function storeVaccine(VaccineRequest $request)
     {
-        $child_id = Auth::user()->child_id;
+        $child_id = Auth::user()->children_id;
         if ($child_id == null) {
             return response()->json(['message' => 'User has not registered a child yest.', "child" => null], 400);
         }

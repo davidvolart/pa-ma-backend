@@ -4,27 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Child;
 use App\Events\FamilyRegisteredEvent;
-use Illuminate\Http\Request;
+use App\Http\Requests\FamilyRequest;
+use Illuminate\Support\Facades\Auth;
 
 class FamilyController extends Controller
 {
-    public function registerFamily(Request $request)
+    public function registerFamily(FamilyRequest $request)
     {
-        $validatedData = $request->validate([
-                                                'child_name' => 'bail|required|string',
-                                                'email' => 'bail|required|string|email|unique:users',
-                                            ]);
-
-        $partner_email = $validatedData['email'];
+        $user = Auth::user();
+        $partner_email = $request->email;
         $family_code = uniqid('',true);
 
-        $request->user()->family_code = $family_code;
-        $request->user()->partner_email = $partner_email;
-        $request->user()->save();
+        $user->family_code = $family_code;
+        $user->partner_email = $partner_email;
+        $user->save();
 
-        $child = new Child(['name' => $validatedData['child_name']]);
+        $child = new Child(['name' => $request->child_name]);
         $child->save();
 
+        $request->user()->children_id = $child->id;
+
         event(new FamilyRegisteredEvent($family_code, $partner_email));
+
+        return response()->json(['message' => 'Family successfully registered.'], 200);
     }
 }

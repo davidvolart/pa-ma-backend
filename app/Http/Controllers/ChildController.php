@@ -17,7 +17,7 @@ class ChildController
      */
     public function storePersonalData(ChildPersonalDataRequest $request)
     {
-        $child_id = Auth::user()->child_id;
+        $child_id = Auth::user()->children_id;
         if ($child_id != null && $child = Child::find($child_id)) {
             $personal_data_keys = ['name', 'id_card', 'health_care_number', 'birthdate'];
 
@@ -47,7 +47,7 @@ class ChildController
     {
         $size_data_keys = ['shirt_size', 'weight', 'dress_size', 'pants_size', 'height', 'shoes_size'];
 
-        $child_id = Auth::user()->child_id;
+        $child_id = Auth::user()->children_id;
         if ($child_id != null && $child = Child::find($child_id)) {
             foreach ($size_data_keys as $key) {
                 $value = request($key);
@@ -66,7 +66,7 @@ class ChildController
      */
     public function listChild(Request $request)
     {
-        $child_id = $request->user()->child_id;
+        $child_id = $request->user()->children_id;
         if ($child_id == null) {
             return response()->json(['message' => 'User has not registered a child yest.', "child" => null], 200);
         }
