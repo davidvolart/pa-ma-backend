@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('vaccines', 'VaccineController@listVaccines');
     Route::post('vaccine', 'VaccineController@storeVaccine');
     Route::post('family', 'FamilyController@registerFamily');
+    Route::get('expenses', 'ExpenditureController@listExpenses');
+    Route::post('expenses', 'ExpenditureController@storeExpenditure');
 });
 
 

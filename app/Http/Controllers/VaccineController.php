@@ -28,7 +28,7 @@ class VaccineController
             return response()->json(['message' => 'User has not registered a child yest.', "child" => null], 400);
         }
 
-        $vaccine = new Vaccine;
+        $vaccine = new Vaccine();
         $vaccine->name = request("name");
         $vaccine->child_id = $child_id;
 

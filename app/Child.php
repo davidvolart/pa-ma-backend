@@ -21,4 +21,8 @@ class Child extends Model
     function vaccines() {
         return $this->hasMany('App\Vaccine');
     }
+
+    function expenses() {
+        return $this->hasMany('App\Expenditure');
+    }
 }
