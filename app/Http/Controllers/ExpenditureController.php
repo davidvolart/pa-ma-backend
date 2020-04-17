@@ -28,7 +28,7 @@ class ExpenditureController extends Controller
             return response()->json(['message' => 'User has not registered a child yet.', "child" => null], 400);
         }
 
-        $expenditure = new Expenditure();
+        $expenditure = Expenditure::findOrNew(request("id"));
         $expenditure->child_id = $child_id;
         $expenditure->name = request('name');
         $expenditure->price = request('price');
@@ -47,7 +47,8 @@ class ExpenditureController extends Controller
         return response()->json(['message' => 'Field date must be a correct date format.'], 400);
     }
 
-    private function getDateInUniversalFormat($expediture_date){
+    private function getDateInUniversalFormat($expediture_date)
+    {
         try {
             $date = explode('/', $expediture_date);
             $date_value = Carbon::createFromDate($date[2], $date[1], $date[0], 'Europe/Madrid');
