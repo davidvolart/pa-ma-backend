@@ -20,7 +20,7 @@ class CreateTasksTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->date('date');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->nullable()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

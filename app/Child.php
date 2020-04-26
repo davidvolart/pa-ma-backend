@@ -17,6 +17,9 @@ class Child extends Model
         'name', 'id_card', 'health_care_number', 'birthdate', 'shirt_size', 'pants_size', 'dress_size', 'shoes_size', 'height', 'weight'
     ];
 
+    function tasks() {
+        return $this->hasMany('App\Task');
+    }
 
     function vaccines() {
         return $this->hasMany('App\Vaccine');
