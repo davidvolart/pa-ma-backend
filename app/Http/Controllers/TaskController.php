@@ -29,10 +29,10 @@ class TaskController extends Controller
             return response()->json(['message' => 'User has not registered a child yest.', "child" => null], 400);
         }
 
-        $task = new Task();
+        $task = Task::findOrNew(request("id"));
 
-        if (filter_var(request("assigne_me"), FILTER_VALIDATE_BOOLEAN)){
-            $task->user_id = $request->user()->id;
+        if (filter_var(request("assigne_me"), FILTER_VALIDATE_BOOLEAN)) {
+            $task->user_email = $request->user()->email;
         }
 
         $task->child_id = $child_id;

@@ -27,7 +27,7 @@ class VaccineRequest extends FormRequest
     {
         return [
             'name'     => 'bail|required|string',
-            'date'     => 'required|string',
+            'date'     => 'bail|required|string',
         ];
     }
 

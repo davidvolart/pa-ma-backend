@@ -27,7 +27,7 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             'name'        => 'bail|required|string|max:255',
-            'date'        => 'bail|required|date',
+            'date'        => 'bail|required|string',
             'assigne_me'  => 'bail|required|string',
             'description' => 'bail|string|max:255',
         ];
