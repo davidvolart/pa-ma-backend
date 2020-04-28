@@ -33,8 +33,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('family', 'FamilyController@registerFamily');
     Route::get('expenses', 'ExpenditureController@listExpenses');
     Route::post('expenses', 'ExpenditureController@storeExpenditure');
+    Route::delete('expenses/{id}', 'ExpenditureController@deleteExpenditure');
     Route::get('tasks', 'TaskController@listTasks');
     Route::post('task', 'TaskController@storeTask');
+    Route::delete('tasks/{id}', 'TaskController@deleteTask');
 });
 
 

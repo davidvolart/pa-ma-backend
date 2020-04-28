@@ -47,6 +47,17 @@ class TaskController extends Controller
         return response()->json(['message' => 'Field date must be a correct date format.'], 400);
     }
 
+    public function deleteTask($id)
+    {
+        try{
+            $task = Task::findOrFail($id);
+        }catch(\Exception $e){
+            return response()->json(['message' => 'Task id does not exist'], 400);
+        }
+        $task->delete();
+        return response()->json(['message' => 'Task deleted correctly'], 200);
+    }
+
     private function getDateInUniversalFormat()
     {
         try {
