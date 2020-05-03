@@ -36,7 +36,7 @@ class ChildController
             $child->save();
             return response()->json(['message' => 'Child personal data has been updated.'], 200);
         }
-        return response()->json(['message' => 'User has not registered a child yest.'], 400);
+        return response()->json(['message' => 'User has not registered a child yet.'], 400);
     }
 
     /**

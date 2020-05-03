@@ -47,7 +47,7 @@ class ExpenditureController extends Controller
         return response()->json(['message' => 'Field date must be a correct date format.'], 400);
     }
 
-    public function deleteExpenditure($id)
+    public function deleteExpenditurep ($id)
     {
         try{
             $task = Expenditure::findOrFail($id);
