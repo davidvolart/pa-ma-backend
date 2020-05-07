@@ -37,6 +37,7 @@ class AuthController extends Controller
                              'email'            => $request->email,
                              'password'         => bcrypt($request->password),
                              'family_code'      => $request->family_code,
+                             'color'            => $this->getColor($request->family_code),
                              'partner_email'    => $partner_email,
                              'activation_token' => Str::random(60),
                              'children_id'      => $child_id,
@@ -96,5 +97,12 @@ class AuthController extends Controller
         $user->activation_token = '';
         $user->save();
         return view('sign-up-activate-success');
+    }
+
+    private function getColor($family_code){
+        if($family_code == null){
+            return 'Blue';
+        }
+        return 'Red';
     }
 }

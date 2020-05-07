@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('tasks', 'TaskController@listTasks');
     Route::post('task', 'TaskController@storeTask');
     Route::delete('tasks/{id}', 'TaskController@deleteTask');
-    Route::get('nannies', 'NannieController@getNannies');
+    Route::post('nannies', 'NannieController@getNannies');
 });
 
 

@@ -15,7 +15,7 @@ class NannieController extends Controller
         try{
             $nannies = $nannifyClient->getNannies($request);
         }catch(\Exception $e){
-            return response()->json(['message' => __('There has been an error while integrating with Nannify')], 500);
+            return response()->json(['message' => __('There has been an error while integrating with Nannify')], 409);
         }
         return response()->json(json_decode($nannies), 200);
     }

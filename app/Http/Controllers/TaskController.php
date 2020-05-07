@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Child;
 use App\Http\Requests\StoreTaskRequest;
 use App\Task;
+use App\User;
 use App\Vaccine;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class TaskController extends Controller
             return response()->json(['message' => 'User has not registered a child yet.', "child" => null], 400);
         }
         $child = Child::find($child_id);
-        return response()->json(['message' => 'List of task for child.', "tasks" => $child->tasks()->get()], 200);
+
+        return response()->json(['message' => 'List of task for child.', 'tasks' => $child->tasks()->get()], 200);
     }
 
     public function storeTask(StoreTaskRequest $request)
