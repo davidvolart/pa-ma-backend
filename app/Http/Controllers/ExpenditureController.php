@@ -33,6 +33,7 @@ class ExpenditureController extends Controller
         $expenditure->name = request('name');
         $expenditure->price = request('price');
         $expenditure->user_id = Auth::user()->id;
+        $expenditure->color = Auth::user()->color;
 
         if ($expenditure_description = request('description')) {
             $expenditure->description = $expenditure_description;

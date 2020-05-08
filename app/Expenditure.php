@@ -24,7 +24,7 @@ class Expenditure extends Model
      * @var array
      */
     protected $fillable = [
-        'child_id', 'name', 'description', 'price', 'date', 'user_id',
+        'child_id', 'name', 'description', 'price', 'date', 'user_id', 'task',
     ];
 
     function child()

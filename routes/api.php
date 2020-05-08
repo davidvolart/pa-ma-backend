@@ -25,6 +25,7 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
+
     Route::post('personaldata', 'ChildController@storePersonalData');
     Route::post('sizedata', 'ChildController@storeSizeData');
     Route::get('child', 'ChildController@listChild');
