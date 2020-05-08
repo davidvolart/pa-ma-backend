@@ -101,8 +101,8 @@ class AuthController extends Controller
 
     private function getColor($family_code){
         if($family_code == null){
-            return 'Blue';
+            return '#673AB7';
         }
-        return 'Red';
+        return '#3F51B5';
     }
 }

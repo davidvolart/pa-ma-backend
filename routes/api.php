@@ -28,15 +28,21 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('personaldata', 'ChildController@storePersonalData');
     Route::post('sizedata', 'ChildController@storeSizeData');
     Route::get('child', 'ChildController@listChild');
+
     Route::get('vaccines', 'VaccineController@listVaccines');
     Route::post('vaccine', 'VaccineController@storeVaccine');
+
     Route::post('family', 'FamilyController@registerFamily');
+    Route::get('familyuserscolors', 'FamilyController@listColorUsers');
+
     Route::get('expenses', 'ExpenditureController@listExpenses');
     Route::post('expenses', 'ExpenditureController@storeExpenditure');
     Route::delete('expenses/{id}', 'ExpenditureController@deleteExpenditure');
+
     Route::get('tasks', 'TaskController@listTasks');
     Route::post('task', 'TaskController@storeTask');
     Route::delete('tasks/{id}', 'TaskController@deleteTask');
+
     Route::post('nannies', 'NannieController@getNannies');
 });
 

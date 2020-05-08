@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Child;
 use App\Events\FamilyRegisteredEvent;
 use App\Http\Requests\FamilyRequest;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FamilyController extends Controller
@@ -28,4 +30,16 @@ class FamilyController extends Controller
 
         return response()->json(['message' => 'Family successfully registered.'], 200);
     }
+
+    public function listColorUsers(Request $request)
+    {
+        $user_id = $request->user()->id;
+        $user1 = User::find($user_id);
+        $user2 = User::where('email',$user1->partner_email)->first();
+
+        return [['email' => $user1->email, 'color' => $user1->color],
+                ['email' => $user2->email,'color' => $user2->color]
+        ];
+    }
+
 }

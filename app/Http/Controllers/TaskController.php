@@ -35,6 +35,9 @@ class TaskController extends Controller
 
         if (filter_var(request("assigne_me"), FILTER_VALIDATE_BOOLEAN)) {
             $task->user_email = $request->user()->email;
+            $task->color = $request->user()->color;
+        }else{
+            $task->color = '#FFB300';
         }
 
         $task->child_id = $child_id;
