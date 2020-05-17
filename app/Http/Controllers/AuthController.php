@@ -23,9 +23,9 @@ class AuthController extends Controller
 
         $child_id = null;
         $partner_email = null;
-        if($family_code = $request->family_code){
+        if ($family_code = $request->family_code) {
             $partner = User::where('family_code', $family_code)->first();
-            if($partner == null){
+            if ($partner == null) {
                 return response()->json(['message' => __('Family code not valid')], 422);
             }
             $partner_email = $partner->email;
@@ -66,13 +66,14 @@ class AuthController extends Controller
         }
 
         $token->save();
-        $user = User::where('email',request('email'))->first();
+        $user = User::where('email', request('email'))->first();
 
         return response()->json([
                                     'access_token' => $tokenResult->accessToken,
                                     'token_type'   => 'Bearer',
                                     'expires_at'   => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString(),
-                                    'family_code'     => $user->family_code
+                                    'family_code'  => $user->family_code,
+                                    'user_name'    => $user->name
                                 ]);
     }
 
@@ -99,8 +100,9 @@ class AuthController extends Controller
         return view('sign-up-activate-success');
     }
 
-    private function getColor($family_code){
-        if($family_code == null){
+    private function getColor($family_code)
+    {
+        if ($family_code == null) {
             return '#673AB7';
         }
         return '#3F51B5';
