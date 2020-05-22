@@ -69,11 +69,13 @@ class AuthController extends Controller
         $user = User::where('email', request('email'))->first();
 
         return response()->json([
-                                    'access_token' => $tokenResult->accessToken,
-                                    'token_type'   => 'Bearer',
-                                    'expires_at'   => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString(),
-                                    'family_code'  => $user->family_code,
-                                    'user_name'    => $user->name
+                                    'response' => [
+                                        'access_token' => $tokenResult->accessToken,
+                                        'token_type'   => 'Bearer',
+                                        'expires_at'   => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString(),
+                                        'family_code'  => $user->family_code,
+                                        'user_name'    => $user->name
+                                    ]
                                 ]);
     }
 
