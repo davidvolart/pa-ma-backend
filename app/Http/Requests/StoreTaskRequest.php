@@ -26,10 +26,11 @@ class StoreTaskRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'bail|required|string|max:255',
-            'date'        => 'bail|required|string',
-            'assigne_me'  => 'bail|required|string',
-            'description' => 'bail|string|max:255',
+            'name'                       => 'bail|required|string|max:255',
+            'date'                       => 'bail|required|string',
+            'assigne_me'                 => 'bail|required|string',
+            'description'                => 'bail|string|max:255',
+            'calendar_provider_event_id' => 'string'
         ];
     }
 

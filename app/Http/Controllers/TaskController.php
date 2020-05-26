@@ -24,6 +24,19 @@ class TaskController extends Controller
         return response()->json(['message' => 'List of task for child.', 'tasks' => $child->tasks()->get()], 200);
     }
 
+    public function listTasksByDate(Request $request, $date)
+    {
+        $child_id = $request->user()->children_id;
+        if ($child_id == null) {
+            return response()->json(['message' => 'User has not registered a child yet.', "child" => null], 400);
+        }
+        $child = Child::find($child_id);
+
+        $tasks_for_given_date = $child->tasks()->where('date', $date)->get();
+
+        return response()->json(['message' => 'List of task for child on date ' . $date . '.', 'tasks' => $tasks_for_given_date], 200);
+    }
+
     public function storeTask(StoreTaskRequest $request)
     {
         $child_id = $request->user()->children_id;
@@ -36,13 +49,14 @@ class TaskController extends Controller
         if (filter_var(request("assigne_me"), FILTER_VALIDATE_BOOLEAN)) {
             $task->user_email = $request->user()->email;
             $task->color = $request->user()->color;
-        }else{
+        } else {
             $task->color = '#FFB300';
         }
 
         $task->child_id = $child_id;
         $task->name = request("name");
         $task->description = request("description");
+        $task->calendar_provider_event_id = request("calendar_provider_event_id");
 
         if ($date_value = $this->getDateInUniversalFormat()) {
             $task->date = $date_value;
@@ -54,9 +68,9 @@ class TaskController extends Controller
 
     public function deleteTask($id)
     {
-        try{
+        try {
             $task = Task::findOrFail($id);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json(['message' => 'Task id does not exist'], 400);
         }
         $task->delete();

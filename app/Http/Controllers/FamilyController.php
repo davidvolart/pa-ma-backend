@@ -15,7 +15,7 @@ class FamilyController extends Controller
     {
         $user = Auth::user();
         $partner_email = $request->email;
-        $family_code = uniqid('',true);
+        $family_code = uniqid('', true);
 
         $user->family_code = $family_code;
         $user->partner_email = $partner_email;
@@ -35,11 +35,10 @@ class FamilyController extends Controller
     {
         $user_id = $request->user()->id;
         $user1 = User::find($user_id);
-        $user2 = User::where('email',$user1->partner_email)->first();
+        $user2 = User::where('email', $user1->partner_email)->first();
 
-        return [['email' => $user1->email, 'color' => $user1->color],
-                ['email' => $user2->email,'color' => $user2->color]
+        return [['name' => $user1->name, 'color' => $user1->color],
+                ['name' => $user2->name, 'color' => $user2->color]
         ];
     }
-
 }

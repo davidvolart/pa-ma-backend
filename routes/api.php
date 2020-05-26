@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('expenses/{id}', 'ExpenditureController@deleteExpenditure');
 
     Route::get('tasks', 'TaskController@listTasks');
+    Route::get('tasks/{date}', 'TaskController@listTasksByDate');
     Route::post('task', 'TaskController@storeTask');
     Route::delete('tasks/{id}', 'TaskController@deleteTask');
 
