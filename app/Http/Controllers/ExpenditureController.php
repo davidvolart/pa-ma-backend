@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Child;
 use App\Expenditure;
 use App\Http\Requests\ExpeditureRequest;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,31 @@ class ExpenditureController extends Controller
         }
         $child = Child::find($child_id);
         return response()->json(['message' => 'List of expenses for child.', "expenses" => $child->expenses()->get()], 200);
+    }
+
+    public function listExpensesByMonth(Request $request, $year, $month)
+    {
+        $user_id = $request->user()->id;
+        $partner_id = User::where('email', $request->user()->partner_email)->first()->id;
+
+        $expenses_user1 = $this->getExpensesByUserAndDate($user_id, $year, $month);
+        $expenses_partner = $this->getExpensesByUserAndDate($partner_id, $year, $month);
+
+        $user1_percentage = ($expenses_user1/($expenses_user1 + $expenses_partner))*100;
+
+
+        return response()->json(['message'  => 'Expenses by date for family users.',
+                                 "expenses" => [
+                                     $user_id    => [
+                                                        'value' => $expenses_user1,
+                                                        'percentage' => $user1_percentage,
+                                                    ],
+                                     $partner_id => [
+                                                        'value' => $expenses_partner,
+                                                        'percentage' => 100 - $user1_percentage,
+                                                    ]
+                                     ]
+                                ], 200);
     }
 
     public function storeExpenditure(ExpeditureRequest $request)
@@ -48,15 +74,24 @@ class ExpenditureController extends Controller
         return response()->json(['message' => 'Field date must be a correct date format.'], 400);
     }
 
-    public function deleteExpenditurep ($id)
+    public function deleteExpenditurep($id)
     {
-        try{
+        try {
             $task = Expenditure::findOrFail($id);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json(['message' => 'Expenditure id does not exist'], 400);
         }
         $task->delete();
         return response()->json(['message' => 'Expenditure deleted correctly'], 200);
+    }
+
+    private function getExpensesByUserAndDate($user_id, $year, $month)
+    {
+        return Expenditure::where([
+                                      ['user_id', $user_id],
+                                      ['date', '>=', $year . '-' . $month . '-01'],
+                                      ['date', '<=', $year . '-' . $month . '-31'],
+                                  ])->sum('price');
     }
 
     private function getDateInUniversalFormat($expediture_date)

@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('familyuserscolors', 'FamilyController@listColorUsers');
 
     Route::get('expenses', 'ExpenditureController@listExpenses');
+    Route::get('expenses/{year}/{month}', 'ExpenditureController@listExpensesByMonth');
     Route::post('expenses', 'ExpenditureController@storeExpenditure');
     Route::delete('expenses/{id}', 'ExpenditureController@deleteExpenditure');
 
