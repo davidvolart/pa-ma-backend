@@ -50,13 +50,18 @@ class TaskController extends Controller
             $task->user_email = $request->user()->email;
             $task->color = $request->user()->color;
         } else {
+            $task->user_email = null;
             $task->color = '#FFB300';
         }
 
         $task->child_id = $child_id;
         $task->name = request("name");
         $task->description = request("description");
-        $task->calendar_provider_event_id = request("calendar_provider_event_id");
+
+        if($calendar_provider_event_id = request("calendar_provider_event_id")){
+            $task->calendar_provider_event_id = $calendar_provider_event_id;
+        }
+
 
         if ($date_value = $this->getDateInUniversalFormat()) {
             $task->date = $date_value;
