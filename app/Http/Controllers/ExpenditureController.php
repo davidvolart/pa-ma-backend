@@ -30,7 +30,6 @@ class ExpenditureController extends Controller
         $expenses_user1 = $this->getExpensesByUserAndDate($user_id, $year, $month+1);
         $expenses_partner = $this->getExpensesByUserAndDate($partner_id, $year, $month+1);
 
-
         if ($expenses_user1 > 0 || $expenses_partner > 0) {
             $user1_percentage = ($expenses_user1 / ($expenses_user1 + $expenses_partner)) * 100;
             $partner_percentage = 100 - $user1_percentage;

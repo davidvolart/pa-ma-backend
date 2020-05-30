@@ -53,7 +53,11 @@ class ChildController
                 $value = request($key);
                 $child->$key = $value;
             }
-            $child->save();
+            try{
+                $child->save();
+            }catch(\Exception $e){
+                return response()->json(['message' => 'There has been an error saving data.'], 500);
+            }
             return response()->json(['message' => 'Child size data has been updated.'], 200);
         } else {
             return response()->json(['message' => 'User has not registered a child yest.'], 400);
