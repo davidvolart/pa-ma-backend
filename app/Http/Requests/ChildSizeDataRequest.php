@@ -27,11 +27,11 @@ class ChildSizeDataRequest extends FormRequest
     {
         return [
             'shirt_size' => 'bail:string|max:10',
-            'weight'     => 'numeric',
             'dress_size' => 'bail|string|max:15',
             'pants_size' => 'bail|string|max:15',
+            'weight'     => 'numeric',
             'height'     => 'numeric',
-            'shoes_size' => 'bail|string|max:15',
+            'shoes_size' => 'numeric',
         ];
     }
 

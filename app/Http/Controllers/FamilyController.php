@@ -37,8 +37,8 @@ class FamilyController extends Controller
         $user1 = User::find($user_id);
         $user2 = User::where('email', $user1->partner_email)->first();
 
-        return [['name' => $user1->name, 'color' => $user1->color],
-                ['name' => $user2->name, 'color' => $user2->color]
+        return [['id' => $user1->id, 'name' => $user1->name, 'color' => $user1->color],
+                ['id' => $user2->id, 'name' => $user2->name, 'color' => $user2->color]
         ];
     }
 }

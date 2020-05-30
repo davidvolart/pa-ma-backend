@@ -27,23 +27,29 @@ class ExpenditureController extends Controller
         $user_id = $request->user()->id;
         $partner_id = User::where('email', $request->user()->partner_email)->first()->id;
 
-        $expenses_user1 = $this->getExpensesByUserAndDate($user_id, $year, $month);
-        $expenses_partner = $this->getExpensesByUserAndDate($partner_id, $year, $month);
+        $expenses_user1 = $this->getExpensesByUserAndDate($user_id, $year, $month+1);
+        $expenses_partner = $this->getExpensesByUserAndDate($partner_id, $year, $month+1);
 
-        $user1_percentage = ($expenses_user1/($expenses_user1 + $expenses_partner))*100;
 
+        if ($expenses_user1 > 0 || $expenses_partner > 0) {
+            $user1_percentage = ($expenses_user1 / ($expenses_user1 + $expenses_partner)) * 100;
+            $partner_percentage = 100 - $user1_percentage;
+        } else {
+            $partner_percentage = 50;
+            $user1_percentage = 50;
+        }
 
         return response()->json(['message'  => 'Expenses by date for family users.',
                                  "expenses" => [
-                                     $user_id    => [
-                                                        'value' => $expenses_user1,
-                                                        'percentage' => $user1_percentage,
-                                                    ],
-                                     $partner_id => [
-                                                        'value' => $expenses_partner,
-                                                        'percentage' => 100 - $user1_percentage,
-                                                    ]
+                                     User::find($user_id)->name    => [
+                                         'value'      => $expenses_user1,
+                                         'percentage' => $user1_percentage,
+                                     ],
+                                     User::find($partner_id)->name => [
+                                         'value'      => $expenses_partner,
+                                         'percentage' => $partner_percentage,
                                      ]
+                                 ]
                                 ], 200);
     }
 
