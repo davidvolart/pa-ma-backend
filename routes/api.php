@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('tasks', 'TaskController@listTasks');
     Route::get('tasks/{date}', 'TaskController@listTasksByDate');
+    Route::get('tasks/{year}/{month}', 'TaskController@listDaysWithTasksByMonth');
     Route::post('task', 'TaskController@storeTask');
     Route::delete('tasks/{id}', 'TaskController@deleteTask');
 

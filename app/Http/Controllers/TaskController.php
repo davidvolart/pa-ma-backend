@@ -37,6 +37,19 @@ class TaskController extends Controller
         return response()->json(['message' => 'List of task for child on date ' . $date . '.', 'tasks' => $tasks_for_given_date], 200);
     }
 
+    public function listDaysWithTasksByMonth(Request $request, $year, $month)
+    {
+        $child_id = $request->user()->children_id;
+        if ($child_id == null) {
+            return response()->json(['message' => 'User has not registered a child yet.', "child" => null], 400);
+        }
+        $child = Child::find($child_id);
+
+        $tasks_for_given_year_month = $child->tasks()->whereYear('date', $year)->whereMonth('date', $month)->get();
+
+        return response()->json(['message' => 'List of task for child on year '.$year.' and month '.$month, 'tasks' => $tasks_for_given_year_month], 200);
+    }
+
     public function storeTask(StoreTaskRequest $request)
     {
         $child_id = $request->user()->children_id;
