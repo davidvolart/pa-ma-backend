@@ -54,8 +54,6 @@ class NannifyClient implements NanniesIntegrationClient
     {
         return [
             'headers' => $this->getHttpHeaders(),
-
-
             'body'    => json_encode($nannifySearch),
         ];
     }
